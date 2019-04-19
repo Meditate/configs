@@ -39,6 +39,7 @@
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
+set number
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -49,18 +50,29 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-rails'
-Plugin 'mileszs/ack.vim'
+Plugin 'airblade/vim-gitgutter'
 Plugin 'airblade/vim-rooter'
-Plugin 'slim-template/vim-slim.git'
-Plugin 'tpope/vim-haml'
-Plugin 'challenger-deep-theme/vim'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'jiangmiao/auto-pairs'
 Plugin 'chrisbra/Colorizer'
+Plugin 'kien/ctrlp.vim'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'slim-template/vim-slim.git'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'tpope/vim-haml'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-fugitive'
+
+" Color themes
+Plugin 'challenger-deep-theme/vim'
+Plugin 'UndeadLeech/vim-undead'
+Plugin 'nightsense/strawberry'
+Plugin 'vim-scripts/pink'
+
+" Airline
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 
 " All of your Plugins must be added before the following line
@@ -186,16 +198,18 @@ set foldcolumn=1
 syntax enable 
 
 " Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
+ if $COLORTERM == 'gnome-terminal'
+     set t_Co=256
+ endif
 
 try
-    colorscheme challenger_deep
+   "1 colorscheme pink
+   " colorscheme strawberry-light
+   colorscheme challenger_deep
 catch
 endtry
 
-set background=dark
+" set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -382,6 +396,8 @@ map <leader>pp :setlocal paste!<cr>
 " Toggle nerdtree
 map <C-\> :NERDTreeToggle<CR>
 
+map <leader>n :NERDTreeFind<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -454,3 +470,47 @@ map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
+
+" air-line
+let g:airline_powerline_fonts = 1
+
+
+" Download powerline fonts from:
+" https://powerline.readthedocs.io/en/master/installation/linux.html#patched-font-installation
+set guifont=Noto\ Mono\ for\ Powerline\ 11
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+
+" AIRLINE CONFIG
+" let g:airline_theme = 'undead'
+let g:airline_theme='papercolor'
+set background=dark
+
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'default'
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
