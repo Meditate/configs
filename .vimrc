@@ -38,6 +38,8 @@
 "    -> Helper functions
 "
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 set nocompatible              " be iMproved, required
 set number
 filetype off                  " required
@@ -63,6 +65,7 @@ Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-haml'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-fugitive'
+Plugin 'Yggdroot/indentLine'
 
 " Color themes
 Plugin 'challenger-deep-theme/vim'
@@ -489,8 +492,8 @@ endif
 let g:airline_theme='papercolor'
 set background=dark
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'default'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#formatter = 'default'
 " unicode symbols
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
@@ -514,3 +517,7 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+
