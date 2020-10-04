@@ -4,3 +4,5 @@
 `./install.sh`
 
 `:redir @* | set guifont | redir END`
+
+`brew install fzf`
