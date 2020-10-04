@@ -45,42 +45,70 @@ set number
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'airblade/vim-rooter'
-Plugin 'chrisbra/Colorizer'
-Plugin 'kien/ctrlp.vim'
-Plugin 'leafgarland/typescript-vim'
-Plugin 'ludovicchabant/vim-gutentags'
-Plugin 'mileszs/ack.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'slim-template/vim-slim.git'
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'tpope/vim-haml'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-fugitive'
-Plugin 'Yggdroot/indentLine'
+Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
+Plug 'chrisbra/Colorizer'
+Plug 'kien/ctrlp.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'mileszs/ack.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'slim-template/vim-slim'
+Plug 'thoughtbot/vim-rspec'
+Plug 'tpope/vim-fugitive'
+Plug 'Yggdroot/indentLine'
+Plug 'ngmy/vim-rubocop'
+Plug 'lmeijvogel/vim-yaml-helper'
+Plug 'junegunn/goyo.vim'
+
+" languages
+Plug 'kchmck/vim-coffee-script'
+Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-haml'
+Plug 'tpope/vim-rails'
+Plug 'mxw/vim-jsx'
+
+
+" Language servers
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
+
+" (Optional) Multi-entry selection UI.
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
 
 " Color themes
-Plugin 'challenger-deep-theme/vim'
-Plugin 'UndeadLeech/vim-undead'
-Plugin 'nightsense/strawberry'
-Plugin 'vim-scripts/pink'
+Plug 'challenger-deep-theme/vim'
+Plug 'UndeadLeech/vim-undead'
+Plug 'nightsense/strawberry'
+Plug 'belak/base16-emacs'
+Plug 'vim-scripts/pink'
+Plug 'arcticicestudio/nord-vim'
+Plug 'kyoz/purify', { 'rtp': 'vim' }
 
 " Airline
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'ryanoasis/vim-devicons'
 
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()              " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -200,19 +228,32 @@ set foldcolumn=1
 " Enable syntax highlighting
 syntax enable 
 
+" gui colors if running iTerm
+if $TERM_PROGRAM =~ "iTerm"
+  set termguicolors
+endif
+if has('nvim')
+  " Turn off Tildas on empty lines
+  set fcs=eob:\ 
+endif
+  
+
 " Enable 256 colors palette in Gnome Terminal
- if $COLORTERM == 'gnome-terminal'
-     set t_Co=256
- endif
+
+" if $COLORTERM == 'gnome-terminal'
+"     set t_Co=256
+" endif
 
 try
-   "1 colorscheme pink
    " colorscheme strawberry-light
-   colorscheme challenger_deep
+   " colorscheme base16-default-dark
+   colorscheme nord
 catch
 endtry
 
 " set background=dark
+highlight VertSplit cterm=NONE
+" highlight VertSplit cterm=NONE
 
 " Set extra options when running in GUI mode
 if has("gui_running")
@@ -227,6 +268,12 @@ set encoding=utf8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
+
+" NerdTREE
+
+let NERDTreeDirArrowExpandable = "\u00a0"
+let NERDTreeDirArrowCollapsible = "\u00a0"
+
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -470,9 +517,12 @@ let g:rails_projections = {
 
 " RSpec.vim mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
+" map <Leader>s :call RunNearestSpec()<CR>
+" map <Leader>l :call RunLastSpec()<CR>
+" map <Leader>a :call RunAllSpecs()<CR>
+
+let g:rspec_command = "bundle exec rspec {spec}"
+
 
 " air-line
 let g:airline_powerline_fonts = 1
@@ -480,7 +530,9 @@ let g:airline_powerline_fonts = 1
 
 " Download powerline fonts from:
 " https://powerline.readthedocs.io/en/master/installation/linux.html#patched-font-installation
-set guifont=Noto\ Mono\ for\ Powerline\ 11
+" :redir @* | set guifont | redir END
+
+set guifont=NotoMonoForPowerline:h13
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -490,7 +542,7 @@ endif
 " AIRLINE CONFIG
 " let g:airline_theme = 'undead'
 let g:airline_theme='papercolor'
-set background=dark
+" set background=dark
 
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#formatter = 'default'
@@ -519,5 +571,87 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nmap <M-k>    :Ack! "\b<cword>\b" <CR>
+nmap <M-S-k>  :Ggrep! "\b<cword>\b" <CR>
+
+" guttentags
+set statusline+=%{gutentags#statusline()}
+let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git", "node_modules", "*.vim/bundle/*"]
+
+
+"rubocop
+let g:vimrubocop_rubocop_cmd = '/Users/macbook/Projects/workpapers/bin/rubocop'
+
+"ctrl
+let g:ctrlp_max_files=0
+let g:ctrlp_max_depth=40
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|.bundle'
+
+"fzf
+let g:fzf_history_dir = '/usr/local/share/fzf-history'
+"
+" CTRL-A CTRL-Q to select all and build quickfix list
+
+let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
+
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+command! -bang -nargs=+ -complete=dir Rag call fzf#vim#ag_raw(<q-args>, {'options': '--delimiter : --nth 4..'}, <bang>0)
+
+nmap ; :Buffers<CR>
+nmap <Leader>t :Files<CR>
+nmap <Leader>r :Tags<CR>
+
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+" Language Servers configuration
+let g:coc_global_extensions = [
+  \ 'coc-tsserver'
+  \ ]
+
+let g:LanguageClient_serverCommands = {
+      \ 'python': ['/usr/local/bin/pyls'],
+      \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
+      \ }
+
+" let g:LanguageClient_fzfOptions = fzf#vim#with_preview().options
+let g:LanguageClient_selectionUIContextMenu = 0
+
+"let expect_keyz = join(keys(get(g:, 'fzf_action')), ',')
+"
+"let g:LanguageClient_fzfOptions = ['--multi', '--bind=ctrl-a:select-all', '--expect='.expect_keyz]
+
+let g:LanguageClient_selectionUI = "quickfix"
+
+nnoremap <Leader>lsp :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <Leader> gi :call LanguageClient#textDocument_implementation()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+" Highlight *.ejs to *.html
+au BufNewFile,BufRead *.ejs set filetype=html
+
+" Gitfugitive
+nnoremap <leader>gd :Gvdiff<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
+
+" jkl acts as ESCAPE in Insert mode
+imap jkl <ESC>
+
+" numerate list with numbers
+vnoremap <silent> <Leader>n :<C-U>let i=1 \| '<,'>g/^/s//\=i.'. '/ \| let i=i+1 \| nohl<CR>
 
