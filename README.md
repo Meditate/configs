@@ -10,3 +10,6 @@
 `:redir @* | set guifont | redir END`
 
 `brew install fzf`
+# Steps
+...
+`:CocConfig` and fill with coc-settings file
