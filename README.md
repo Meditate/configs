@@ -1,3 +1,7 @@
+# Dependencies
+ - go
+ - https://github.com/juliosueiras/terraform-lsp
+
 # config powerline
 
 `git clone https://github.com/powerline/fonts.git`
