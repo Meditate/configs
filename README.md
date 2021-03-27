@@ -1,6 +1,7 @@
 # Dependencies
- - go
+ - go (with `~/go/bin/` path)
  - https://github.com/juliosueiras/terraform-lsp
+
 
 # config powerline
 
@@ -13,3 +14,4 @@
 # Steps
 ...
 `:CocConfig` and fill with coc-settings file
+`GO111MODULE=on go get golang.org/x/tools/gopls@latest` from ( go lsp-client https://github.com/golang/tools/tree/master/gopls)
