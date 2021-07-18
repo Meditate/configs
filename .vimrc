@@ -577,6 +577,7 @@ nmap <M-S-k>  :Ggrep! "\b<cword>\b" <CR>
 " guttentags
 set statusline+=%{gutentags#statusline()}
 let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git", "node_modules", "*.vim/bundle/*"]
+let g:gutentags_project_root = [".project_root"]
 
 
 "rubocop
