@@ -2,6 +2,8 @@
  - go (with `~/go/bin/` path)
  - https://github.com/juliosueiras/terraform-lsp
  - ctags: https://github.com/universal-ctags/homebrew-universal-ctags
+ - silver searcher https://github.com/ggreer/the_silver_searcher
+ - ack https://beyondgrep.com/install/
 
 
 # config powerline
