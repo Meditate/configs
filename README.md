@@ -1,6 +1,7 @@
 # Dependencies
  - go (with `~/go/bin/` path)
  - https://github.com/juliosueiras/terraform-lsp
+ - ctags: https://github.com/universal-ctags/homebrew-universal-ctags
 
 
 # config powerline
