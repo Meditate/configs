@@ -626,6 +626,10 @@ let g:LanguageClient_serverCommands = {
       \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
       \ }
 
+let g:LanguageClient_rootMarkers = {
+      \ 'ruby': ['.project_root']
+      \ }
+
 " let g:LanguageClient_fzfOptions = fzf#vim#with_preview().options
 let g:LanguageClient_selectionUIContextMenu = 0
 
