@@ -10,8 +10,13 @@ Instruction for NVIM unix
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'`
 # config powerline
 
+- powerline fonts
 `git clone https://github.com/powerline/fonts.git`
 `./install.sh`
+
+- pathced with icons
+`git clone git@github.com:ryanoasis/nerd-fonts.git`
+
 
 `:redir @* | set guifont | redir END`
 
