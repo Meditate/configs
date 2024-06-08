@@ -14,9 +14,9 @@ Instruction for NVIM unix
 `git clone https://github.com/powerline/fonts.git`
 `./install.sh`
 
-- pathced with icons
+- patched with icons
 `git clone git@github.com:ryanoasis/nerd-fonts.git`
-
+`brew install font-roboto-mono-nerd-font`
 
 `:redir @* | set guifont | redir END`
 
