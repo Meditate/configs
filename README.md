@@ -23,6 +23,17 @@ Instruction for NVIM unix
 `brew install fzf`
 
 `brew install ctags`
+# Language Client
+For M1 there is a problem with building bins, install rust and cargo with
+`brew install rust`
+`curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+
+and run install.sh manually, from `cd ~/.vim/plugged/LanguageClient-neovim/`
+```
+bash install.sh
+mv target/release/languageclient bin
+```
+
 # Steps
 ...
 `:CocConfig` and fill with coc-settings file
