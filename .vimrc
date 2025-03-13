@@ -577,6 +577,7 @@ nmap <M-S-k>  :Ggrep! "\b<cword>\b" <CR>
 " guttentags
 set statusline+=%{gutentags#statusline()}
 let g:gutentags_ctags_exclude = ["*.min.js", "*.min.css", "build", "vendor", ".git", "node_modules", "*.vim/bundle/*"]
+let g:gutentags_project_root = [".project_root"]
 
 
 "rubocop
@@ -623,6 +624,10 @@ let g:coc_global_extensions = [
 let g:LanguageClient_serverCommands = {
       \ 'python': ['/usr/local/bin/pyls'],
       \ 'ruby': ['~/.rbenv/shims/solargraph', 'stdio'],
+      \ }
+
+let g:LanguageClient_rootMarkers = {
+      \ 'ruby': ['.project_root']
       \ }
 
 " let g:LanguageClient_fzfOptions = fzf#vim#with_preview().options
