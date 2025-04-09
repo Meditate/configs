@@ -1,127 +1,4 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Maintainer: 
-"       Amir Salihefendic
-"       http://amix.dk - amix@amix.dk
-"
-" Version: 
-"       6.0 - 01/04/17 14:24:34 
-"
-" Blog_post: 
-"       http://amix.dk/blog/post/19691#The-ultimate-Vim-configuration-on-Github
-"
-" Awesome_version:
-"       Get this config, nice color schemes and lots of plugins!
-"
-"       Install the awesome version from:
-"
-"           https://github.com/amix/vimrc
-"
-" Syntax_highlighted:
-"       http://amix.dk/vim/vimrc.html
-"
-" Raw_version: 
-"       http://amix.dk/vim/vimrc.txt
-"
-" Sections:
-"    -> General
-"    -> VIM user interface
-"    -> Colors and Fonts
-"    -> Files and backups
-"    -> Text, tab and indent related
-"    -> Visual mode related
-"    -> Moving around, tabs and buffers
-"    -> Status line
-"    -> Editing mappings
-"    -> vimgrep searching and cope displaying
-"    -> Spell checking
-"    -> Misc
-"    -> Helper functions
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let NERDTreeMinimalUI = 1
-let NERDTreeDirArrows = 1
-set nocompatible              " be iMproved, required
-set number
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-call plug#begin('~/.vim/plugged')
-
-Plug 'airblade/vim-gitgutter'
-Plug 'airblade/vim-rooter'
-Plug 'chrisbra/Colorizer'
-Plug 'kien/ctrlp.vim'
-Plug 'leafgarland/typescript-vim'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'mileszs/ack.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'slim-template/vim-slim'
-Plug 'thoughtbot/vim-rspec'
-Plug 'tpope/vim-fugitive'
-Plug 'Yggdroot/indentLine'
-Plug 'ngmy/vim-rubocop'
-Plug 'lmeijvogel/vim-yaml-helper'
-Plug 'junegunn/goyo.vim'
-
-" languages
-Plug 'kchmck/vim-coffee-script'
-Plug 'pangloss/vim-javascript'
-Plug 'tpope/vim-haml'
-Plug 'tpope/vim-rails'
-Plug 'mxw/vim-jsx'
-
-
-" Language servers
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-
-if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
-  let g:coc_global_extensions += ['coc-prettier']
-endif
-
-if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
-  let g:coc_global_extensions += ['coc-eslint']
-endif
-
-" (Optional) Multi-entry selection UI.
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'mileszs/ack.vim'
-
-" Color themes
-Plug 'challenger-deep-theme/vim'
-Plug 'UndeadLeech/vim-undead'
-Plug 'nightsense/strawberry'
-Plug 'belak/base16-emacs'
-Plug 'vim-scripts/pink'
-Plug 'arcticicestudio/nord-vim'
-Plug 'kyoz/purify', { 'rtp': 'vim' }
-
-" Airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-Plug 'ryanoasis/vim-devicons'
-
-
-" All of your Plugins must be added before the following line
-call plug#end()              " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
@@ -247,7 +124,7 @@ endif
 try
    " colorscheme strawberry-light
    " colorscheme base16-default-dark
-   colorscheme nord
+   colorscheme tokyonight
 catch
 endtry
 
@@ -271,9 +148,13 @@ set ffs=unix,dos,mac
 
 " NerdTREE
 
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 let NERDTreeDirArrowExpandable = "\u00a0"
 let NERDTreeDirArrowCollapsible = "\u00a0"
 
+map <C-\> :NERDTreeToggle<CR>
+map <leader>n :NERDTreeFind<cr>
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -443,11 +324,6 @@ map <leader>x :e ~/buffer.md<cr>
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
 
-" Toggle nerdtree
-map <C-\> :NERDTreeToggle<CR>
-
-map <leader>n :NERDTreeFind<cr>
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -502,18 +378,6 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
-
-" Prefere *_spec.rb rather than *_test.rb with :A
-let g:rails_projections = {
-      \  'app/*.rb': {
-      \     'alternate': 'spec/{}_spec.rb',
-      \     'type': 'source'
-      \   },
-      \  'spec/*_spec.rb': {
-      \     'alternate': 'app/{}.rb',
-      \     'type': 'test'
-      \   }
-      \}
 
 " RSpec.vim mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
@@ -654,4 +518,3 @@ imap jkl <ESC>
 
 " numerate list with numbers
 vnoremap <silent> <Leader>n :<C-U>let i=1 \| '<,'>g/^/s//\=i.'. '/ \| let i=i+1 \| nohl<CR>
-
