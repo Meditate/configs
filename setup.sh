@@ -17,6 +17,7 @@ brew install git
 brew install iterm2
 brew install zsh
 brew install tig
+brew install the_silver_searcher
 
 echo "Installing neovim"
 brew install neovim

@@ -1,6 +1,9 @@
 # Dependencies
  - go (with `~/go/bin/` path)
  - https://github.com/juliosueiras/terraform-lsp
+ - brew install the_silver_searcher (https://github.com/ggreer/the_silver_searcher)
+
+
 
 # Install vim-plug
 https://github.com/junegunn/vim-plug
