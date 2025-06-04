@@ -18,6 +18,7 @@ brew install iterm2
 brew install zsh
 brew install tig
 brew install the_silver_searcher
+brew install luarocks # Lua package manager
 
 echo "Installing neovim"
 brew install neovim
