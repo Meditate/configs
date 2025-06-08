@@ -1,6 +1,6 @@
 # My local env setup
 
-<img width="1509" alt="Screenshot 2025-06-08 at 11 53 07" src="https://github.com/user-attachments/assets/701bd0fe-a12a-4000-810f-d57cd0861e0f" />
+<img width="1914" alt="Screenshot 2025-06-08 at 16 50 32" src="https://github.com/user-attachments/assets/5f1992bc-433c-485d-9a04-489fac2096fb" />
 
 # Dependencies
  - go (with `~/go/bin/` path)
