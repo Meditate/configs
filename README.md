@@ -1,3 +1,7 @@
+# My local env setup
+
+<img width="1509" alt="Screenshot 2025-06-08 at 11 53 07" src="https://github.com/user-attachments/assets/701bd0fe-a12a-4000-810f-d57cd0861e0f" />
+
 # Dependencies
  - go (with `~/go/bin/` path)
  - https://github.com/juliosueiras/terraform-lsp
