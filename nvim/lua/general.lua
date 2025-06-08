@@ -67,10 +67,11 @@ vim.o.cmdheight = 2 -- height of the command line
 
 vim.o.foldcolumn = "1" -- Add a bit extra margin to the left
 
-local status_ok, _ = pcall(vim.cmd.colorscheme, 'tokyonight')
-if not status_ok then
-  vim.notify('Colorscheme "tokyonight" not found!', vim.log.levels.WARN)
-end
+local status_ok, _ = pcall(vim.cmd.colorscheme, 'carbonfox')
+-- local status_ok, _ = pcall(vim.cmd.colorscheme, 'tokyonight')
+-- if not status_ok then
+--   vim.notify('Colorscheme "tokyonight" not found!', vim.log.levels.WARN)
+-- end
 
 vim.o.ffs = "unix,dos,mac" -- set the default file formats
 

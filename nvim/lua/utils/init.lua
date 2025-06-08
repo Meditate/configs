@@ -76,7 +76,7 @@ function M.GetRandomAirlineTheme()
   local theme_count = #themes
   local random_index = math.random(1, theme_count)
   -- local random_theme = themes[random_index]
-  local random_theme = "luna"
+  local random_theme = "ayu_dark"
 
   local command_string = "AirlineTheme " .. random_theme
 

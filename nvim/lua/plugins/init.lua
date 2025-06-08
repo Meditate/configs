@@ -49,9 +49,24 @@ return {
     dependencies = {
       "ryanoasis/vim-devicons",
     },
-    config = function()
-      vim.cmd.colorscheme("tokyonight")
-    end,
+    opts = {
+      style = "moon",
+      transparent = true,
+      styles = {
+         sidebars = "transparent",
+         floats = "transparent",
+      },
+    },
+  },
+  {
+    "EdenEast/nightfox.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      options = {
+        transparent = true,
+      },
+    },
   },
   {
     "vim-airline/vim-airline",

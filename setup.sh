@@ -15,6 +15,7 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 echo "Installing essential packages..."
 brew install git
 brew install iterm2
+brew instal --cask kitty
 brew install zsh
 brew install tig
 brew install the_silver_searcher
@@ -34,6 +35,7 @@ mkdir ../fonts
 git clone https://github.com/powerline/fonts.git ../fonts
 sh ../fonts/install.sh
 brew install font-inconsolata-nerd-font
+brew install font-fira-mono-nerd-font
 
 echo "Installing Oh My Zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
