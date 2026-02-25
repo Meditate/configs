@@ -17,6 +17,8 @@ brew install git
 brew install iterm2
 brew instal --cask kitty
 brew install zsh
+brew install awscli
+brew install postgresql
 brew install tig
 brew install the_silver_searcher
 brew install luarocks # Lua package manager
@@ -39,6 +41,16 @@ brew install font-fira-mono-nerd-font
 
 echo "Installing Oh My Zsh..."
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+echo "Install side tools"
+brew install kubectl
+### sqlit BEGIN
+brew install pipx
+pipx ensurepath
+pipx install sqlit-tui
+pipx inject sqlit-tui psycopg2-binary
+### sqlit END
+
 
 
 
